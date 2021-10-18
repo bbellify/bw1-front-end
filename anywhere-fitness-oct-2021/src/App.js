@@ -1,21 +1,29 @@
 import './App.css';
+import { Route, Switch, NavLink } from 'react-router-dom';
 //homepage
 import HomePage from './components/homepage'
-import Class from './components/class'
+
 import Classes from './components/classes'
-import Login from './components/login'
-import Register from './components/register'
 
 function App() {
   return (
     <div className="App">
-      <HomePage/>
-      <Class/>
-    <Classes/>
-    <Login/>
-    <Register/>
+      <nav style={{ 
+        display: 'flex',
+        justifyContent: 'space-evenly' }}>
+        <NavLink to={'/'}>Home</NavLink>
+        <NavLink to={'/classes'}>Classes</NavLink>
+      </nav>      
+      <Switch>
+        <Route exact path={'/'}>
+          <HomePage/>
+        </Route>
 
+        <Route path={'/classes'}>
+          <Classes/>
+        </Route>
 
+    </Switch>
     </div>
   );
 }

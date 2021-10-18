@@ -2,14 +2,14 @@ import * as yup from 'yup';
 
 
 const registerSchema = yup.object().shape({
-    first_name: yup
+    name: yup
         .string()
         .trim()
         .required('Please add your first name'),
-    last_name: yup
+    username: yup
         .string()
         .trim()
-        .required('Please add your last name'),
+        .required('Please create a username'),
     email: yup
         .string()
         .email('Must be a valid email address')

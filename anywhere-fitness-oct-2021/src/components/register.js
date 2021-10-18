@@ -10,16 +10,16 @@ export default function Register(props) {
     // everything from here until message below should maybe be passed as props?
 
     const initialFormValues = {
-        first_name: '',
-        last_name: '',
+        name: '',
+        username: '',
         email: '',
         password: '',
         code: ''
     }
     
     const initialFormErrors = {
-        first_name: '',
-        last_name: '',
+        name: '',
+        username: '',
         email: '',
         password: '',
         code: ''
@@ -44,8 +44,8 @@ export default function Register(props) {
     
     const formSubmit = () => {
         const newAccount = {
-            first_name: formValues.first_name.trim(),
-            last_name: formValues.last_name.trim(),
+            name: formValues.name.trim(),
+            username: formValues.username.trim(),
             email: formValues.email.trim(),
             password: formValues.password.trim(),
             code: formValues.code,
@@ -90,20 +90,22 @@ export default function Register(props) {
                 alignItems: 'center' 
             }}>
             <h2>Create a New Account</h2>
-            <label>First Name:
+            <label>Name:
                 <input 
-                    value={formValues.first_name}
-                    name='first_name'
+                    value={formValues.name}
+                    name='name'
                     type='text'
                     onChange={onChange}
+                    placeholder='Enter your name here'
                     />
             </label>
-            <label>Last Name:
+            <label>Username:
                 <input 
-                    value={formValues.last_name}
-                    name='last_name'
+                    value={formValues.username}
+                    name='username'
                     type='text'
                     onChange={onChange}
+                    placeholder='Enter your username here'
                     />
             </label>
 
@@ -113,6 +115,7 @@ export default function Register(props) {
                         onChange={onChange}
                         name='email'
                         type='text'
+                        placeholder='Enter your email here'
                     />
             </label>
 
@@ -122,6 +125,7 @@ export default function Register(props) {
                         name='password'
                         type='text'
                         onChange={onChange}
+                        placeholder='Create a password here'
                     />
             </label>
 
@@ -134,8 +138,8 @@ export default function Register(props) {
                     />
             </label>
             <div className='errors'>
-                <p>{formErrors.first_name}</p>
-                <p>{formErrors.last_name}</p>
+                <p>{formErrors.name}</p>
+                <p>{formErrors.username}</p>
                 <p>{formErrors.email}</p>
                 <p>{formErrors.password}</p>
                 <p>{formErrors.code}</p>
