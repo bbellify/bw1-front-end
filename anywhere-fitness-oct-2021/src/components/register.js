@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
-import registerSchema from '../registerSchema';
+import registerSchema from '../validation/registerSchema';
   
 
 export default function Register(props) {
