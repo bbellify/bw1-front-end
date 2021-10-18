@@ -52,10 +52,10 @@ export default function Register(props) {
         // axios.post()
     }
     
-    // useEffect(() => {
-    //     registerSchema.isValid(formValues)
-    //       .then(valid => setDisabled(!valid))
-    //   }, [formValues])
+    useEffect(() => {
+        registerSchema.isValid(formValues)
+          .then(valid => setDisabled(!valid))
+      }, [formValues])
    
   
     // end of prop passing - rest stays in Register
@@ -90,7 +90,6 @@ export default function Register(props) {
                     onChange={onChange}
                     />
             </label>
-
             <label>Last Name:
                 <input 
                     value={formValues.last_name}
@@ -126,10 +125,14 @@ export default function Register(props) {
                         onChange={onChange}
                     />
             </label>
-            <button style={{
-                width: 'fit-content'
-                
-            }}>Create Account</button>
+            <div className='errors'>
+                <p>{formErrors.first_name}</p>
+                <p>{formErrors.last_name}</p>
+                <p>{formErrors.email}</p>
+                <p>{formErrors.password}</p>
+                <p>{formErrors.code}</p>
+            </div>
+            <button disabled={disabled} style={{ width: 'fit-content' }}>Create Account</button>
         </form>
         
     </div>
