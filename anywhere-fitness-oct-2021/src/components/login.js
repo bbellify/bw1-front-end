@@ -1,6 +1,10 @@
 import React from 'react';
+import { useState, useEffect } from 'react'
+import loginSchema from '../validation/loginSchema';
 
 const Login = () => {
+
+    const [ disabled, setDisabled ] = useState(true);
 
 
     const onSubmit = evt => {
@@ -22,7 +26,7 @@ const Login = () => {
                     placeholder='Password'
                 />
             </label>
-            <button onSubmit={onSubmit}>Log In</button>
+            <button disabled={disabled} onSubmit={onSubmit}>Log In</button>
         </form>
 
     </div>
