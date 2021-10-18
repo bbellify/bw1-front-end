@@ -1,21 +1,26 @@
+import ReactDOM from 'react-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
+
 //homepage
 import HomePage from './components/homepage'
 import Class from './components/class'
 import Classes from './components/classes'
-import Login from './components/login'
-import Register from './components/register'
+
 
 function App() {
   return (
     <div className="App">
-      <HomePage/>
-      <Class/>
-    <Classes/>
-    <Login/>
-    <Register/>
+      <Switch>
+        <Route exact path={'/'}>
+          <HomePage/>
+        </Route>
 
+        <Route path={'/classes'}>
+          <Classes/>
+        </Route>
 
+    </Switch>
     </div>
   );
 }
