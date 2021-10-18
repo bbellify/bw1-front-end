@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import * as yup from 'yup';
 import registerSchema from '../registerSchema';
   
@@ -24,7 +25,7 @@ export default function Register(props) {
         code: ''
     }
     
-    // const [users, setUsers] = useState([]);
+
     const [formValues, setFormValues] = useState(initialFormValues);
     const [formErrors, setFormErrors] = useState(initialFormErrors);
     const [disabled, setDisabled] = useState(true)
@@ -42,14 +43,21 @@ export default function Register(props) {
     }
     
     const formSubmit = () => {
-        const newUser = {
+        const newAccount = {
             first_name: formValues.first_name.trim(),
             last_name: formValues.last_name.trim(),
             email: formValues.email.trim(),
             password: formValues.password.trim(),
-            termsOfService: formValues.code,
+            code: formValues.code,
         }
-        // axios.post()
+        axios.post('https://reqres.in/api/users', newAccount)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+            .finally(setFormValues(initialFormValues))
     }
     
     useEffect(() => {
