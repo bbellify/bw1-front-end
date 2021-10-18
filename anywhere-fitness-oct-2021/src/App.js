@@ -4,7 +4,7 @@ import './App.css';
 
 //homepage
 import HomePage from './components/homepage'
-import Class from './components/class'
+
 import Classes from './components/classes'
 
 
