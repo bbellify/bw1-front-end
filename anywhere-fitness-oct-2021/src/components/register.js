@@ -42,6 +42,7 @@ export default function Register(props) {
         setFormValues({ ...formValues, [name]: value })
     }
     
+    // API post - probably need to add to post?
     const formSubmit = () => {
         const newAccount = {
             name: formValues.name.trim(),
@@ -50,7 +51,7 @@ export default function Register(props) {
             password: formValues.password.trim(),
             code: formValues.code,
         }
-        axios.post('https://reqres.in/api/users', newAccount)
+        axios.post('https://fitness-4-you.herokuapp.com/api/auth/register', newAccount)
             .then(res => {
                 console.log(res)
             })

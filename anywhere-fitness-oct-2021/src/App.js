@@ -30,6 +30,7 @@ function App() {
         <NavLink to={'/register'}>Register</NavLink>
         <NavLink to={'/login'}>Log In</NavLink>
       </Nav>      
+      
       <Switch>
         <Route exact path={'/'}>
           <HomePage/>
