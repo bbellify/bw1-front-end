@@ -1,110 +1,151 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
 
-export default function ClassForm(props) {
-  const { values, update, submit } = props;
+
+const initialData = {
+  class_id: '',
+  category: '',
+  start_time:'',
+  duration: '',
+  intensity_level: '',
+  location: '',
+  current_capacity: '',
+  max_capacity: ''
+}
+
+const ClassForm = props => {
+  const [item, setItem] = useState(initialData);
   const history = useHistory();
 
-  const onChange = (evt) => {
-    const { name, value } = evt.target;
-    update(name, value);
-  };
-
-  const onSubmit = (evt) => {
-    evt.preventDefault();
-    submit();
-    history.push("/classes");
-  };
-
-  return (
-    <form className="classes-container" onSubmit={onSubmit}>
-      <label>
-        Class Name:
-        <input
-          name="name"
-          type="text"
-          placeholder="Class Name..."
-          maxLength="50"
-          value={values.name}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Type of Class:
-        <input
-          name="type"
-          type="text"
-          placeholder="Type of Class..."
-          maxLength="50"
-          value={values.type}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Start Time:
-        <input
-          name="start_time"
-          type="text"
-          placeholder="Start Time..."
-          maxLength="50"
-          value={values.start_time}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Duration:
-        <input
-          name="duration"
-          type="text"
-          placeholder="Duration..."
-          maxLength="50"
-          value={values.duration}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Difficulty:
-        <input
-          name="intensity_level"
-          type="text"
-          placeholder="Difficulty..."
-          maxLength="50"
-          value={values.intensity_level}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Location:
-        <input
-          name="location"
-          type="text"
-          placeholder="Location..."
-          maxLength="50"
-          value={values.location}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <label>
-        Max Class Size:
-        <input
-          name="max_class_size"
-          type="text"
-          placeholder="Max Class Size..."
-          maxLength="50"
-          value={values.max_class_size}
-          onChange={onChange}
-        />
-      </label>
-      <br />
-      <div className="submit">
-        <button>Create Class</button>
-      </div>
-    </form>
-  );
+  const handleChange = event => {
+        
+    setItem({
+        ...item,
+        [event.target.name]:event.target.value
+        });
 }
+const submitForm = () => {
+  const newClass ={
+    class_id: item.class_id.trim(),
+    category: item.category.trim(),
+    start_time:item.start_time.trim(),
+    duration: item.duration.trim(),
+    intensity_level: item.intensity_level.trim(),
+    location: item.location.trim(),
+    current_capacity: item.current_capacity.trim(),
+    max_capacity: item.max_capacity.trim(),
+    }
+    console.log(newClass)
+    axios.post('https://fitness-4-you.herokuapp.com/api/classes', newClass)
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+      console.log('error catch')
+    })
+  }
+const handleSubmit = event => {
+    event.preventDefault();
+  submitForm();
+}
+return (
+  <form onSubmit={handleSubmit}>
+    <label>
+      Class Name
+      <input
+      name='class_id'
+      value={item.class_id}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Category
+      <input
+      name='category'
+      value={item.category}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Start Time
+      <input
+      name='start_time'
+      value={item.start_time}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Duration
+      <input
+      name='duration'
+      value={item.duration}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Intensity
+      <input
+      name='intensity_level'
+      value={item.intensity_level}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Location
+      <input
+      name='location'
+      value={item.location}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Current Capacity
+      <input
+      name='current_capacity'
+      value={item.current_capacity}
+      onChange={handleChange}
+      />
+    </label>
+    <label>
+      Max Capacity
+      <input
+      name='max_capacity'
+      value={item.max_capacity}
+      onChange={handleChange}
+      />
+    </label>
+
+
+    <button>Add Class</button>
+
+
+  </form>
+)
+}
+export default ClassForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
