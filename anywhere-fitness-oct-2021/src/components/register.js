@@ -65,12 +65,15 @@ export default function Register(props) {
         }
         axios.post(`${BASE_URL}/api/auth/register`, newAccount)
             .then(res => {
+                console.log(newAccount);
                 console.log(res)
             })
             .catch(err => {
+                console.log(newAccount)
                 console.error(err)
             })
-            .finally(setFormValues(initialFormValues))
+            .finally(
+                setFormValues(initialFormValues))
     }
     
     useEffect(() => {
