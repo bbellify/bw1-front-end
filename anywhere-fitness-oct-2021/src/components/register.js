@@ -2,8 +2,20 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
+import styled from 'styled-components'
 import registerSchema from '../validation/registerSchema';
   
+
+const RegisterCard = styled.div`
+    background-color: lightgray;
+    width: 60%;
+    margin-top:2%;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 2% 0;
+    line-height: 1.5;
+    
+`
 
 export default function Register(props) {
    
@@ -86,93 +98,94 @@ export default function Register(props) {
 
 
     return (
-
-    <div>
-        <form onSubmit={onSubmit}
-            style={{ 
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center' 
-            }}>
-            <h2>Create a New Account</h2>
-            <label>Name:
-                <input 
-                    value={formValues.name}
-                    name='name'
-                    type='text'
-                    onChange={onChange}
-                    placeholder='Enter your name here'
-                    />
-            </label>
-            <label>Username:
-                <input 
-                    value={formValues.username}
-                    name='username'
-                    type='text'
-                    onChange={onChange}
-                    placeholder='Enter your username here'
-                    />
-            </label>
-
-            <label>Email:
-                    <input
-                        value={formValues.email}
-                        onChange={onChange}
-                        name='email'
-                        type='text'
-                        placeholder='Enter your email here'
-                    />
-            </label>
-
-            <label>Create password:
-                    <input
-                        value={formValues.password}
-                        name='password'
+    <div className='wrapper' style={{display:'flex', justifyContent:'center'}}>
+        <RegisterCard>
+            <form onSubmit={onSubmit}
+                style={{ 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center' 
+                }}>
+                <h2>Create a New Account</h2>
+                <label>Name:
+                    <input 
+                        value={formValues.name}
+                        name='name'
                         type='text'
                         onChange={onChange}
-                        placeholder='Create a password here'
-                    />
-            </label>
-
-            <h4>Are you an instructor?</h4>
-                <label>Yes
-                    <input
-                        value='true'
-                        checked={formValues.instructor === true}
-                        name='instructor'
-                        type='radio'
+                        placeholder='Enter your name here'
+                        />
+                </label>
+                <label>Username:
+                    <input 
+                        value={formValues.username}
+                        name='username'
+                        type='text'
                         onChange={onChange}
-                    />
-                </label>    
-                <label>No
-                    <input
-                        value='false'
-                        checked={formValues.instructor === false}
-                        name='instructor'
-                        type='radio'
-                        onChange={onChange}
-                    />
+                        placeholder='Enter your username here'
+                        />
                 </label>
 
-                {formValues.instructor && 
-                <label>Authorization code:
-                    <input
-                        value={formValues.code}
-                        name='code'
-                        type='text'
-                        onChange={onChange}
-                    />
-                    </label>}
-            <div className='errors'>
-                <p>{formErrors.name}</p>
-                <p>{formErrors.username}</p>
-                <p>{formErrors.email}</p>
-                <p>{formErrors.password}</p>
-                <p>{formErrors.code}</p>
-            </div>
-            <button disabled={disabled} style={{ width: 'fit-content' }}>Create Account</button>
-        </form>
-        
+                <label>Email:
+                        <input
+                            value={formValues.email}
+                            onChange={onChange}
+                            name='email'
+                            type='text'
+                            placeholder='Enter your email here'
+                        />
+                </label>
+
+                <label>Create password:
+                        <input
+                            value={formValues.password}
+                            name='password'
+                            type='text'
+                            onChange={onChange}
+                            placeholder='Create a password here'
+                        />
+                </label>
+
+                <h4>Are you an instructor?</h4>
+                    <label>Yes
+                        <input
+                            type='radio'
+                            name='instructor'
+                            value={true}
+                            onChange={onChange}
+                            checked={formValues.instructor === true}
+                        />
+                    </label>    
+                    <label>No
+                        <input
+                            type='radio'
+                            name='instructor'
+                            value={false}
+                            onChange={onChange}
+                            checked={formValues.instructor === false}
+                        />
+                    </label>
+
+                    {formValues.instructor && 
+                    <label>Authorization code:
+                        <input
+                            value={formValues.code}
+                            name='code'
+                            type='text'
+                            onChange={onChange}
+                        />
+                        </label>}
+                <div className='errors'>
+                    <p>{formErrors.name}</p>
+                    <p>{formErrors.username}</p>
+                    <p>{formErrors.email}</p>
+                    <p>{formErrors.password}</p>
+                    <p>{formErrors.code}</p>
+                </div>
+                <button disabled={disabled} style={{ width: 'fit-content' }}>Create Account</button>
+            </form>
+            
+        </RegisterCard>
     </div>
     )
 }
