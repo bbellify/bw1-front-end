@@ -26,9 +26,6 @@ function App() {
         display: 'flex',
         justifyContent: 'right' }}>
         <NavLink to={'/'}>Home</NavLink>
-        <NavLink to={'/classes'}>Classes</NavLink>
-        <NavLink to={'/register'}>Register</NavLink>
-        <NavLink to={'/login'}>Log In</NavLink>
       </Nav>      
       
       <Switch>
