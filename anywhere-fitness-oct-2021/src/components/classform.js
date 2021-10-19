@@ -26,18 +26,18 @@ const ClassForm = props => {
         });
 }
 const submitForm = () => {
-  const newClass ={
-    class_id: item.class_id.trim(),
-    category: item.category.trim(),
-    start_time:item.start_time.trim(),
-    duration: item.duration.trim(),
-    intensity_level: item.intensity_level.trim(),
-    location: item.location.trim(),
-    current_capacity: item.current_capacity.trim(),
-    max_capacity: item.max_capacity.trim(),
-    }
-    console.log(newClass)
-    axios.post('https://fitness-4-you.herokuapp.com/api/classes', newClass)
+  // const newClass ={
+  //   class_id: item.class_id.trim(),
+  //   category: item.category.trim(),
+  //   start_time:item.start_time.trim(),
+  //   duration: item.duration.trim(),
+  //   intensity_level: item.intensity_level.trim(),
+  //   location: item.location.trim(),
+  //   current_capacity: item.current_capacity.trim(),
+  //   max_capacity: item.max_capacity.trim(),
+  //   }
+    // console.log(newClass)
+    axios.post('https://fitness-4-you.herokuapp.com/api/classes')
     .then(response => {
       console.log(response.data)
     })
