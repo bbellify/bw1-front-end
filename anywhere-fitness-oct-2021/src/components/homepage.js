@@ -9,6 +9,7 @@ const HomePage = () => {
         <h2>Fitness Anywhere, Anytime.</h2>
         <NavLink to={'/login'}>Log In</NavLink>
         <NavLink to={'/register'}>Register</NavLink>
+        <NavLink to={`/classes`}>Add Class</NavLink>
     </div>
     )
 }

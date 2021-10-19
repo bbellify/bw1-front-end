@@ -1,12 +1,11 @@
 import React from 'react';
-import Class from './class'
+import Class from './class';
+import ClassForm from './classform'
 
 const Classes = () => {
     return (
     <div className="class-wrapper">
-        <h1>Classes</h1>
-        <h2>Classes work</h2>
-        <Class />
+       <ClassForm />
     </div>
     )
 }
