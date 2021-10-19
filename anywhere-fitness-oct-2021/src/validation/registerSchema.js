@@ -19,7 +19,7 @@ const registerSchema = yup.object().shape({
         .required('Please create a password')
         .min(6, 'Password must be at least 6 characters long'),
     isInstructor: yup
-        .boolean()
+        .bool()
 })
 
 export default registerSchema

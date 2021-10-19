@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 import loginSchema from '../validation/loginSchema';
 import styled from 'styled-components'
+import { BASE_URL } from '../constants';
 
 
 const SubmitButton = styled.button`
@@ -46,7 +47,7 @@ const Login = () => {
             username: formValues.username.trim(),
             password: formValues.password.trim(),
         }
-        axios.post('https://fitness-4-you.herokuapp.com/api/auth/login', newLogin)
+        axios.post(`${BASE_URL}/api/auth/login`, newLogin)
             .then(res => {
                 console.log(res)
             })
@@ -65,6 +66,7 @@ const Login = () => {
 
     const onSubmit = evt => {
         evt.preventDefault()
+        formSubmit();
     }
 
     const onChange = evt => {
@@ -89,7 +91,7 @@ const Login = () => {
             <label>Password:
                 <input 
                     name='password'
-                    type='text'
+                    type='password'
                     onChange={onChange}
                     placeholder='Password'
                     value={formValues.password}
