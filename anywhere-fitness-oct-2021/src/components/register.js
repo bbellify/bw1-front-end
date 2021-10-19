@@ -14,6 +14,7 @@ export default function Register(props) {
         username: '',
         email: '',
         password: '',
+        instructor: false,
         code: ''
     }
     
@@ -22,6 +23,7 @@ export default function Register(props) {
         username: '',
         email: '',
         password: '',
+        instructor: '',
         code: ''
     }
     
@@ -49,7 +51,8 @@ export default function Register(props) {
             username: formValues.username.trim(),
             email: formValues.email.trim(),
             password: formValues.password.trim(),
-            code: formValues.code,
+            instructor: formValues.instructor,
+            code: formValues.code.trim(),
         }
         axios.post('https://fitness-4-you.herokuapp.com/api/auth/register', newAccount)
             .then(res => {
@@ -76,8 +79,9 @@ export default function Register(props) {
     }
 
     const onChange = evt => {
-        const { name, value } = evt.target
-        inputChange(name, value)
+        const { name, value, checked, type } = evt.target
+        const valueToUse = type === 'radio' ? checked : value;
+        inputChange(name, valueToUse)
     }
 
 
@@ -130,14 +134,35 @@ export default function Register(props) {
                     />
             </label>
 
-            <label>Instructor Code:
+            <h4>Are you an instructor?</h4>
+                <label>Yes
+                    <input
+                        value='true'
+                        checked={formValues.instructor === true}
+                        name='instructor'
+                        type='radio'
+                        onChange={onChange}
+                    />
+                </label>    
+                <label>No
+                    <input
+                        value='false'
+                        checked={formValues.instructor === false}
+                        name='instructor'
+                        type='radio'
+                        onChange={onChange}
+                    />
+                </label>
+
+                {formValues.instructor && 
+                <label>Authorization code:
                     <input
                         value={formValues.code}
                         name='code'
                         type='text'
                         onChange={onChange}
                     />
-            </label>
+                    </label>}
             <div className='errors'>
                 <p>{formErrors.name}</p>
                 <p>{formErrors.username}</p>
