@@ -63,7 +63,7 @@ export default function Register(props) {
             password: formValues.password.trim(),
             isInstructor: formValues.isInstructor,
         }
-        axios.post(`${BASE_URL}api/auth/register`, newAccount)
+        axios.post(`${BASE_URL}/api/auth/register`, newAccount)
             .then(res => {
                 console.log(res)
             })
