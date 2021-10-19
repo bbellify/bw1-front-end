@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 import styled from 'styled-components'
 import registerSchema from '../validation/registerSchema';
-  
+import { BASE_URL } from '../constants';
 
 const RegisterCard = styled.div`
     background-color: lightgray;
@@ -28,8 +28,7 @@ export default function Register(props) {
         username: '',
         email: '',
         password: '',
-        instructor: false,
-        code: ''
+        isInstructor: false,
     }
     
     const initialFormErrors = {
@@ -37,8 +36,7 @@ export default function Register(props) {
         username: '',
         email: '',
         password: '',
-        instructor: '',
-        code: ''
+        isInstructor: ''
     }
     
 
@@ -67,18 +65,20 @@ export default function Register(props) {
             username: formValues.username.trim(),
             email: formValues.email.trim(),
             password: formValues.password.trim(),
-            instructor: formValues.instructor,
-            code: formValues.code.trim(),
+            isInstructor: formValues.isInstructor,
         }
-        axios.post('https://fitness-4-you.herokuapp.com/api/auth/register', newAccount)
+        axios.post(`${BASE_URL}/api/auth/register`, newAccount)
             .then(res => {
+                console.log(newAccount);
                 console.log(res)
                 push('/login')
             })
             .catch(err => {
+                console.log(newAccount)
                 console.error(err)
             })
-            .finally(setFormValues(initialFormValues))
+            .finally(
+                setFormValues(initialFormValues))
     }
     
     useEffect(() => {
@@ -97,7 +97,7 @@ export default function Register(props) {
 
     const onChange = evt => {
         const { name, value, checked, type } = evt.target
-        const valueToUse = type === 'radio' ? checked : value;
+        const valueToUse = type === 'checkbox' ? checked : value;
         inputChange(name, valueToUse)
     }
 
@@ -151,41 +151,21 @@ export default function Register(props) {
                         />
                 </label>
 
-                <h4>Are you an instructor?</h4>
-                    <label>Yes
-                        <input
-                            type='radio'
-                            name='instructor'
-                            value={true}
-                            onChange={onChange}
-                            checked={formValues.instructor === true}
-                        />
-                    </label>    
-                    <label>No
-                        <input
-                            type='radio'
-                            name='instructor'
-                            value={false}
-                            onChange={onChange}
-                            checked={formValues.instructor === false}
-                        />
-                    </label>
+                <label>Check if you are creating an instructor account:
+                    <input
+                        type='checkbox'
+                        name='isInstructor'
+                        value={true}
+                        onChange={onChange}
+                        checked={formValues.isInstructor === true}
+                    />
+                </label>
 
-                    {formValues.instructor && 
-                    <label>Authorization code:
-                        <input
-                            value={formValues.code}
-                            name='code'
-                            type='text'
-                            onChange={onChange}
-                        />
-                        </label>}
                 <div className='errors'>
                     <p>{formErrors.name}</p>
                     <p>{formErrors.username}</p>
                     <p>{formErrors.email}</p>
                     <p>{formErrors.password}</p>
-                    <p>{formErrors.code}</p>
                 </div>
                 <button disabled={disabled} style={{ width: 'fit-content' }}>Create Account</button>
             </form>
