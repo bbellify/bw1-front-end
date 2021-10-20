@@ -7,6 +7,7 @@ import HomePage from './components/homepage'
 import Classes from './components/classes'
 import Login from './components/login'
 import Register from './components/register'
+import Class from './components/class'
 
 const Nav = styled.nav`
   display: flex;
@@ -31,6 +32,10 @@ function App() {
       <Switch>
         <Route exact path={'/'}>
           <HomePage/>
+
+        {/* remove component below - placed here for testing */}
+        <Class />
+
         </Route>
 
         <Route path={'/classes'}>
