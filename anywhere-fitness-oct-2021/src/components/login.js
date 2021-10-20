@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import loginSchema from '../validation/loginSchema';
 import styled from 'styled-components'
@@ -10,9 +11,10 @@ const SubmitButton = styled.button`
     width: fit-content;
 `
 
-const Login = () => {
+const Login = (props) => {
+    const { push } = useHistory();
 
-    // pass with props?
+    // pass with props  ?
 
     const initialFormValues = {
         username: '',
@@ -46,9 +48,13 @@ const Login = () => {
             username: formValues.username.trim(),
             password: formValues.password.trim(),
         }
-        axios.post('https://fitness-4-you.herokuapp.com/api/auth/login', newLogin)
+        axiosWithAuth()
+            .post('/auth/login', newLogin)
             .then(res => {
-                console.log(res)
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('username', formValues.username);
+                props.loginStatus(true);
+                push('/')
             })
             .catch(err => {
                 console.error(err)
@@ -76,7 +82,7 @@ const Login = () => {
     return (
     <div>
         <h3>Login:</h3>
-        <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <form onSubmit={formSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <label>Username:
                 <input 
                     name='username'

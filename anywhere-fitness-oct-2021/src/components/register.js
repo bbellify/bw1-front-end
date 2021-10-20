@@ -70,7 +70,7 @@ export default function Register(props) {
             instructor: formValues.instructor,
             code: formValues.code.trim(),
         }
-        axios.post('https://fitness-4-you.herokuapp.com/api/auth/register', newAccount)
+        axios.post('https://fitness-4-you.herokuapp.com/auth/register', newAccount)
             .then(res => {
                 console.log(res)
                 push('/login')
