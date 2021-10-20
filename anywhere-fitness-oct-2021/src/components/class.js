@@ -10,6 +10,9 @@ const ClassCard = styled.div`
 `
 
 
+
+
+
 export default function Class(props) {
 
     // uncomment this once Class is actually receiving a Class object from Classes component
@@ -25,16 +28,21 @@ export default function Class(props) {
 
 
 
+
+
+    // delete everything from here to where indicated below
+
     const [classList, setClassList] = useState([])
 
 
     useEffect(() => {
         axios.get(`${BASE_URL}/api/classes`)
         .then( res => {
-            console.log(res.data);
+            // console.log(res.data);
             setClassList(res.data);
-        }).catch(err =>
-            console.error(err))
+        }).catch(err => {
+            console.error(err);
+        })
     }, [])
 
     const { name,
@@ -44,10 +52,17 @@ export default function Class(props) {
             intensity_level,
             location,
             max_capacity 
-        } = classList['1'];
+        } = classList[1];
 
+
+    // end of delete section
 
     return (
+    
+    // delete 'classList &&' below - needed for testing purposes but should not need once this component is nested under parent component
+    classList &&
+
+
     <ClassCard>
         <h3>{name}</h3>
         <h4>Category: {category}</h4>
@@ -60,7 +75,3 @@ export default function Class(props) {
     </ClassCard>
     )
 }
-
-
-
-// name, category, start time, duration, intensity_level, location, max_capacity
