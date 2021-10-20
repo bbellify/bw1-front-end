@@ -1,21 +1,36 @@
 import React from 'react';
-import { useEffect, useState } from 'react'
-import { BASE_URL } from '../constants'
-import axios from 'axios'
 import styled from 'styled-components'
 
 
-const ClassCard = styled.div`
+// this is just a rough draft of styling - can be edited freely by anyone that wants to prettify it
 
+const ClassCard = styled.div`
+    background-color: lightgrey;
+    width: 20%;
+    padding: 1% 1%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 10px;
 `
 
+const ClassName = styled.h3`
+    margin: 5px;
+`
 
+const ClassCategory = styled.h4`
+    margin: 5px;
+`
 
+const ClassP = styled.p`
+    margin: 5px;
+`
 
+// this component is expecting a class object from a class list array passed as props
 
 export default function Class(props) {
 
-    // uncomment this once Class is actually receiving a Class object from Classes component
+    // uncomment this const once Class is actually receiving a Class object from Classes component
 
     // const { name,
     //         category, 
@@ -27,23 +42,18 @@ export default function Class(props) {
     //     } = props
 
 
+    // delete everything from here to where indicated below - was all for testing purposes
 
+    const dummyClass = {
+        name: 'Fartleks in the Park',
+        category: 'HIIT',
+        start_time: '10:00 am',
+        duration: '1 hour',
+        intensity_level: 9,
+        location: 'Green Park',
+        max_capacity: 15
+    }
 
-
-    // delete everything from here to where indicated below
-
-    const [classList, setClassList] = useState([])
-
-
-    useEffect(() => {
-        axios.get(`${BASE_URL}/api/classes`)
-        .then( res => {
-            // console.log(res.data);
-            setClassList(res.data);
-        }).catch(err => {
-            console.error(err);
-        })
-    }, [])
 
     const { name,
             category, 
@@ -52,25 +62,22 @@ export default function Class(props) {
             intensity_level,
             location,
             max_capacity 
-        } = classList[1];
-
+        } = dummyClass;
 
     // end of delete section
 
+
     return (
     
-    // delete 'classList &&' below - needed for testing purposes but should not need once this component is nested under parent component
-    classList &&
-
 
     <ClassCard>
-        <h3>{name}</h3>
-        <h4>Category: {category}</h4>
-        <p>Starts at: {start_time}</p>
-        <p>Goes for: {duration}</p>
-        <p>Intensity Level: {intensity_level}</p>
-        <p>Location: {location}</p>
-        <p>Class capacity: {max_capacity}</p>
+        <ClassName>{name}</ClassName>
+        <ClassCategory>Category: {category}</ClassCategory>
+        <ClassP>Starts at: {start_time}</ClassP>
+        <ClassP>Goes for: {duration}</ClassP>
+        <ClassP>Intensity Level: {intensity_level}</ClassP>
+        <ClassP>Location: {location}</ClassP>
+        <ClassP>Class Capacity: {max_capacity}</ClassP>
 
     </ClassCard>
     )
