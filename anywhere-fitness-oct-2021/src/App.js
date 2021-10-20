@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Switch, NavLink } from 'react-router-dom';
 import styled from 'styled-components'
-
+import PrivateRoute from './components/PrivateRoute';
 //homepage
 import HomePage from './components/homepage'
 import Classes from './components/classes'
@@ -33,10 +33,6 @@ function App() {
           <HomePage/>
         </Route>
 
-        <Route path={'/classes'}>
-          <Classes/>
-        </Route>
-
         <Route path={'/login'}>
           <Login />
         </Route>
@@ -44,7 +40,8 @@ function App() {
         <Route path={'/register'}>
           <Register />
         </Route>
-        
+
+        <PrivateRoute path={'/classes'}/>    
 
         
     </Switch>
