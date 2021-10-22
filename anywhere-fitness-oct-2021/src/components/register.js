@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 import styled from 'styled-components'
@@ -20,6 +20,8 @@ const RegisterCard = styled.div`
 export default function Register(props) {
    
     // everything from here until message below should maybe be passed as props?
+
+    const { push } = useHistory()
 
     const initialFormValues = {
         name: '',
@@ -56,6 +58,8 @@ export default function Register(props) {
     
     // API post - probably need to add to post?
     const formSubmit = () => {
+        
+
         const newAccount = {
             name: formValues.name.trim(),
             username: formValues.username.trim(),
@@ -67,6 +71,7 @@ export default function Register(props) {
             .then(res => {
                 console.log(newAccount);
                 console.log(res)
+                push('/login')
             })
             .catch(err => {
                 console.log(newAccount)
